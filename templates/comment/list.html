@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <table>
+    <thead>
+      <div>
+
+          <th> 번호</th>
+
+
+          <th> 아이디</th>
+
+
+          <th> 내용 </th>
+
+
+      </div>
+    </thead>
+      <div>
+        {% if posts %}   <!--posts안에 데이터가 담겨 있으면 반복문을 실행한다. -->
+            {% for post in posts %}   <!--posts안에 있는 것을 하나하나 꺼내서 post에 저장한다  파이썬과 용법 동일함 -->
+              <div>
+                <tr>
+                  <td> {{post.id}} </td>  <!--post라는 객체 안에 있는 id를 보여준다 -->
+                  <td> {{ post.title }} </td>
+                  <td> {{ post.contents }}  </td>
+                </tr>
+              </div>
+             {% endfor %}
+         {% endif %}
+      </div>
+    </table>
+
+
+</body>
+</html>

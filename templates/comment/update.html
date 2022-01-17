@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form  method = "post">
+        {% csrf_token %}
+        {{commentForm}}
+        <input type = 'submit'>
+<!--         버튼을 누르면 원래 action이라고 적힌 부분을 반복하지만 없기 때문에 현재 url로 보낸다.-->
+
+
+    </form>
+</body>
+</html>

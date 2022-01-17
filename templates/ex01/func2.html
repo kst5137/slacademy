@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+
+    </style>
+</head>
+<body>
+<form method="post" action="/ex01/func1">
+	{% csrf_token %}
+	<input type="text" name="var1">
+	<input type="text" name="var2">
+	<input type="submit">
+</form>
+
+<div style="border: solid 1px">
+    나는 div박스다
+</div>
+<br>
+
+
+<span style="color: red;">
+	나는 span 박스다
+</span>
+
+
+
+</body>
+</html>

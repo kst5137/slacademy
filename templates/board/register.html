@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action = "/board/register" method="post">
+    {% csrf_token %}
+    {{ boardForm }}
+    <input type="submit">
+</form>
+
+<!--forms.py를 추가하지 않을거면 밑에처럼 해도됨-->
+<!--<form method="post" action="/board/register">-->
+<!--	{% csrf_token %}-->
+<!--	<input type="text" name="title">-->
+<!--	<input type="text" name="content">-->
+<!--	<input type="submit">-->
+<!--</form>-->
+<!--form태그에 action속성은 action에 작성한 url로 데이터를 보낸다는것-->
+
+</body>
+</html>
+

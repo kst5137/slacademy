@@ -1,0 +1,116 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+{% load static %}
+
+
+<section class="page-section portfolio" id="portfolio">
+    <div class="container">
+        <!-- Portfolio Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Portfolio</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <!-- Portfolio Grid Items-->
+        <div class="row justify-content-center">
+            {% if posts %}
+            {% for post in posts %}
+            <!-- Portfolio Item 1-->
+            <div class="col-md-6 col-lg-4 mb-5">
+                <div class="portfolio-item mx-auto" data-bs-toggle="modal"
+                     data-bs-target="#portfolioModal1" >
+                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100" >
+                        <div class="portfolio-item-caption-content text-center text-white"><i
+                                class="fas fa-plus fa-3x"></i></div>
+                    </div >
+                    <img class="img-fluid" src="{% static 'assets/img/portfolio/cabin.png' %}" alt="..."/>
+                    <div>제목 : {{ post.title }}</div>
+                    <div>작성자 : {{ post.writer }}</div>
+                </div>
+                <div>
+                    <h1 onclick="sendLike( {{ post.id }}, this )">
+                        {% if user in post.like.all %}
+<!--                        만약 유저가 post에 like를 누른 모든 사람들 중 있으면-->
+                        ♥
+                        {% else %}
+                        ♡
+                        {% endif %}
+                    </h1>
+                    <h3 class="col-2"> {{post.like.count}} </h3>
+                </div>
+
+
+            </div>
+            {% endfor %}
+            {% endif %}
+
+        </div>
+    </div>
+
+    <script>
+
+                function sendLike(bid, event)
+                 {
+                    var httpRequest = new XMLHttpRequest();
+			        httpRequest.onreadystatechange = function()
+			            {
+				            if (httpRequest.readyState == XMLHttpRequest.DONE && httpRequest.status == 200 )
+				                {
+
+<!--									console.log(httpRequest.responseText);-->
+                                        var json = JSON.parse(httpRequest.responseText);
+
+                                        if (json['message'] == 'add') {
+                                            event.innerText = "♥"
+                                            event.nextSibling.nextSibling.innerText = json['like_cnt'];
+                                        }
+                                        else if (json['message'] == 'del') {
+                                            event.innerText = "♡"
+                                            event.nextSibling.nextSibling.innerText = json['like_cnt'];
+                                        }
+
+				                }
+			            };
+
+			        httpRequest.open("GET", "/board/like/" + bid , true);
+			        httpRequest.send();
+                 }
+
+
+    </script>
+
+
+</section>
+
+<!--<table>-->
+<!--    <thead>-->
+<!--      <div>-->
+
+<!--          <th> 글 번호</th>-->
+<!--          <th> 제목</th>-->
+<!--          <th> 작성자 </th>-->
+<!--          <th> 작성시간 </th>-->
+
+
+<!--      </div>-->
+<!--    </thead>-->
+<!--      <div>-->
+<!--        {% if posts %}   &lt;!&ndash;posts안에 데이터가 담겨 있으면 반복문을 실행한다. &ndash;&gt;-->
+<!--            {% for post in posts %}   &lt;!&ndash;posts안에 있는 것을 하나하나 꺼내서 post에 저장한다  파이썬과 용법 동일함 &ndash;&gt;-->
+<!--              <div>-->
+<!--                <tr>-->
+<!--                  <td> {{post.id}} </td>  &lt;!&ndash;post라는 객체 안에 있는 id를 보여준다 &ndash;&gt;-->
+<!--                  <td> {{ post.title }} </td>-->
+<!--                  <td> {{ post.writer }}  </td>-->
+<!--                  <td> {{ post.create_date }}  </td>-->
+<!--                </tr>-->
+
+
+<!--              </div>-->
+<!--             {% endfor %}-->
+<!--         {% endif %}-->
+<!--      </div>-->
+<!--    </table>-->
+{% endblock %}

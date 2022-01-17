@@ -1,0 +1,24 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+{% load static %}
+
+
+
+
+ <section class="page-section" id="contact">
+            <div class="container">
+                <!-- Contact Section Heading-->
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">게시글 작성</h2>
+
+                <form action = "/board/register" method="post">
+                        {% csrf_token %}
+                        {{ boardForm }}
+                      <input type="submit">
+                </form>
+            </div>
+        </section>
+
+
+
+
+{% endblock %}
